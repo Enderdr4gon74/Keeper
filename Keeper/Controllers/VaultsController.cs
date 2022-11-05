@@ -6,11 +6,14 @@ public class VaultsController : ControllerBase
 {
   private readonly Auth0Provider _auth0provider;
   private readonly VaultsService _vs;
+  private readonly VaultKeepsService _vks;
 
-  public VaultsController(Auth0Provider auth0Provider, VaultsService vs)
+
+  public VaultsController(Auth0Provider auth0Provider, VaultsService vs, VaultKeepsService vks)
   {
     _auth0provider = auth0Provider;
     _vs = vs;
+    _vks = vks;
   }
 
   [HttpPost]
@@ -38,6 +41,20 @@ public class VaultsController : ControllerBase
     {
       Vault vault = _vs.GetVaultById(id);
       return Ok(vault);
+    }
+    catch (System.Exception ex)
+    {
+      return BadRequest(ex.Message);
+    }
+  }
+
+  [HttpGet("{id}/keeps")]
+  public ActionResult<List<VaultKeep>> GetVaultKeepsByVaultId(int id)
+  {
+    try
+    {
+      List<VaultKeep> vaultKeeps = _vks.GetVaultKeepsByVaultId(id);
+      return Ok(vaultKeeps);
     }
     catch (System.Exception ex)
     {

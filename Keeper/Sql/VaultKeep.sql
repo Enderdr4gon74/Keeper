@@ -13,3 +13,8 @@ CREATE TABLE IF NOT EXISTS vaultKeeps(
 ) default charset utf8 COMMENT '';
 
 -- DROP TABLE vaultKeeps;
+
+SELECT
+    vk.*
+    FROM vaultKeeps vk
+    WHERE vk.vaultId = 20;
