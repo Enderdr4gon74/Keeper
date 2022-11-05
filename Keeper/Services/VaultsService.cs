@@ -16,7 +16,29 @@ public class VaultsService
 
   internal Vault GetVaultById(int id)
   {
-    return _vp.GetVaultById(id);
+    Vault vault = _vp.GetVaultById(id);
+    if (vault.IsPrivate){
+      throw new Exception("Unfortunately this vault is private!");
+    }
+    return vault;
+  }
+
+  internal List<Vault> GetVaultsByProfileId(string profileId)
+  {
+    List<Vault> vaults = _vp.GetVaultsByProfileId(profileId);
+    vaults.ForEach((vault) => {
+      int vaultIndex = vaults.FindIndex(v => v.Id == vault.Id);
+      if (vault.IsPrivate) {
+        vaults.RemoveAt(vaultIndex);
+      }
+    });
+    return vaults;
+  }
+
+  internal List<Vault> GetVaultsByAccountId(string userId)
+  {
+    List<Vault> vaults = _vp.GetVaultsByProfileId(userId);
+    return vaults;
   }
 
     private Check CheckIfNotCreator(int id, string userId)

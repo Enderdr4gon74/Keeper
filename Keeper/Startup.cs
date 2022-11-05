@@ -41,6 +41,8 @@ public class Startup
     services.AddTransient<VaultsRepository>();
     services.AddTransient<VaultKeepsService>();
     services.AddTransient<VaultKeepsRepository>();
+    services.AddTransient<ProfilesService>();
+    services.AddTransient<ProfilesRepository>();
   }
 
   private void ConfigureCors(IServiceCollection services)

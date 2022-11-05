@@ -49,6 +49,22 @@ public class KeepsRepository : BaseRepository
     return keep;
   }
 
+  internal List<Keep> GetKeepsByProfileId(string profileId)
+  {
+    string sql = @"
+    SELECT
+    keep.*,
+    a.*
+    FROM keeps keep
+    JOIN accounts a ON a.id = keep.creatorId
+    WHERE keep.creatorId = @profileId;";
+    List<Keep> keeps = _db.Query<Keep, Profile, Keep>(sql, (keep, profile)=> {
+      keep.Creator = profile;
+      return keep;
+    }, new {profileId}).AsList();
+    return keeps;
+  }
+
   internal void IncrementViews(int id)
   {
     string sql = "UPDATE keeps SET views = views + 1 WHERE id = @id;";
@@ -56,6 +72,25 @@ public class KeepsRepository : BaseRepository
     if (rowsAffected == 0) {
       throw new Exception("Unable to increment Views!");
     }
+  }
+
+  internal void IncrementKept(int id)
+  {
+    string sql = "UPDATE keeps SET kept = kept + 1 WHERE id = @id;";
+    int rowsAffected = _db.Execute(sql, new {id});
+    if (rowsAffected == 0) {
+      throw new Exception("Unable to increment Kept!");
+    }
+  }
+
+  internal void DecrementKept(int id)
+  {
+    string sql = "UPDATE keeps SET kept = kept - 1 WHERE id = @id;";
+    int rowsAffected = _db.Execute(sql, new {id});
+    if (rowsAffected == 0) {
+      throw new Exception("Unable to decrement Kept!");
+    }
+    Console.WriteLine("decremented keep: " + id);
   }
 
   internal Keep UpdateKeep(Keep keepData)

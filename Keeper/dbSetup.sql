@@ -1,3 +1,4 @@
+-- Active: 1666715483154@@SG-gamy-nylon-9663-6841-mysql-master.servers.mongodirector.com@3306@genshinImpact
 CREATE TABLE IF NOT EXISTS accounts(
   id VARCHAR(255) NOT NULL primary key COMMENT 'primary key',
   createdAt DATETIME DEFAULT CURRENT_TIMESTAMP COMMENT 'Time Created',
@@ -6,3 +7,5 @@ CREATE TABLE IF NOT EXISTS accounts(
   email varchar(255) COMMENT 'User Email',
   picture varchar(255) COMMENT 'User Picture'
 ) default charset utf8 COMMENT '';
+
+SELECT * FROM accounts WHERE id = "6329e9f30bd50af94ff220a9";

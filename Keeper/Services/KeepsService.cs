@@ -25,6 +25,11 @@ public class KeepsService
     return _kp.GetKeepById(id);
   }
 
+  internal List<Keep> GetKeepsByProfileId(string profileId)
+  {
+    return _kp.GetKeepsByProfileId(profileId);
+  }
+
   internal Keep UpdateKeep(int id, Keep keepData, string userId)
   {
     Check check = CheckIfNotCreator(id, userId);

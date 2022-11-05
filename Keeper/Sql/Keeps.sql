@@ -24,4 +24,6 @@ SELECT
       a.*
       FROM keeps keep
       JOIN accounts a ON a.id = keep.creatorId
-      WHERE keep.id = 1;
+      WHERE keep.id = 60;
+
+UPDATE keeps SET kept = kept - 1 WHERE id = 60;

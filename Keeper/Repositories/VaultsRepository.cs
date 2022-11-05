@@ -34,6 +34,22 @@ public class VaultsRepository : BaseRepository
     return vault;
   }
 
+  internal List<Vault> GetVaultsByProfileId(string profileId)
+  {
+    string sql = @"
+    SELECT
+    vault.*,
+    a.*
+    FROM vaults vault
+    JOIN accounts a ON a.id = vault.creatorId
+    WHERE vault.creatorId = @profileId;";
+    List<Vault> vaults = _db.Query<Vault, Profile, Vault>(sql, (vault, profile)=> {
+      vault.Creator = profile;
+      return vault;
+    }, new {profileId}).AsList();
+    return vaults;
+  }
+
   internal Vault UpdateVault(Vault vaultData)
   {
     string sql = @"
