@@ -43,10 +43,6 @@ public class VaultKeepsService
       throw new Exception("Your chose the wrong vault to get foul!");
     }
     List<VaultKeep> vaultKeeps = _vkr.GetVaultKeepsByVaultId(vaultId);
-    vaultKeeps.ForEach((vaultKeep)=> {
-      vaultKeep.Keep.Creator = _as.GetById(vaultKeep.Keep.CreatorId);
-      vaultKeep.Vault.Creator = _as.GetById(vaultKeep.Vault.CreatorId);
-    });
     return vaultKeeps;
   }
 
@@ -61,3 +57,22 @@ public class VaultKeepsService
     _vkr.DeleteVaultKeep(vaultKeepId);
   }
 }
+
+
+
+
+
+
+
+    // vaultKeeps.ForEach((vaultKeep)=> {
+    //   vaultKeep.Keep.Creator = _as.GetById(vaultKeep.Keep.CreatorId);
+    //   vaultKeep.Vault.Creator = _as.GetById(vaultKeep.Vault.CreatorId);
+    // });
+    // List<VaultKeepKeep> vaultKeepKeeps = _vkr.GetVaultKeepKeepsByVaultId(vaultId);
+    // // Console.WriteLine(vaultKeepKeeps.Count);
+    // // for (int i = 1; i < vaultKeepKeeps.Count-1; i++) {
+    // //   Console.Write(i + ", ");
+    // //   vaultKeepKeeps[i].VaultKeepId = vaultKeeps[i].VaultKeepId;
+    // // }
+    // // List<VaultKeepKeepKeep> vaultKeepKeepKeeps = vaultKeeps.ConvertAll<VaultKeepKeepKeep>(VK => new VaultKeepKeepKeep(VK));
+    // Console.WriteLine(vaultKeepKeeps);

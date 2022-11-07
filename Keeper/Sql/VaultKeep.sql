@@ -18,3 +18,5 @@ SELECT
     vk.*
     FROM vaultKeeps vk
     WHERE vk.vaultId = 20;
+
+SELECT keepId FROM vaultKeeps WHERE `vaultId` = 7;

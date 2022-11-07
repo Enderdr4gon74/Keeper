@@ -1,10 +1,8 @@
 <template>
-  <section class="container-fluid">
-    <div class="row">
-      <div class="col-12 columns p-2">
-        <div class="p-2" v-for="k in keeps" :key="k.id">
-          <KeepCard :keep="k" />
-        </div>
+  <section class="row">
+    <div class="col-12 columns p-2">
+      <div class="p-2" v-for="k in keeps" :key="k.id">
+        <KeepCard :keep="k" />
       </div>
     </div>
   </section>

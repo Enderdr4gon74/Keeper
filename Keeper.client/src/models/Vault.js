@@ -1,8 +1,10 @@
+import { Profile } from "./Profile.js"
+
 export class Vault {
   constructor(data) {
     this.id = data.id
     this.creatorId = data.creatorId
-    this.creator = data.creator
+    this.creator = new Profile(data.creator)
     this.createdAt = data.createdAt
     this.updatedAt = data.updatedAt
     this.name = data.name

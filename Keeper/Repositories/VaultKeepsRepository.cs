@@ -2,8 +2,11 @@ namespace Keeper.Repositories;
 
 public class VaultKeepsRepository : BaseRepository
 {
-  public VaultKeepsRepository(IDbConnection db) : base(db)
+  private readonly KeepsRepository _keepsRepository;
+
+  public VaultKeepsRepository(IDbConnection db, KeepsRepository keepsRepository) : base(db)
   {
+    _keepsRepository = keepsRepository;
   }
 
   internal VaultKeep CreateVaultKeep(VaultKeep vaultKeepData)
@@ -30,14 +33,33 @@ public class VaultKeepsRepository : BaseRepository
     JOIN vaults v ON v.id = vk.vaultId
     JOIN keeps k ON k.id = vk.keepId
     WHERE vk.vaultId = @vaultId;";
-    List<VaultKeep> vaultKeeps = _db.Query<VaultKeep, Profile, Vault, Keep, VaultKeep>(sql, (vaultKeep, profile, vault, keep) => {
+    List<VaultKeep> vaultKeeps = _db.Query<VaultKeep, Profile, Vault, Keep, VaultKeep>(sql, (vaultKeep, profile, vault, keep) =>
+    {
       vaultKeep.Creator = profile;
       vaultKeep.Vault = vault;
       vaultKeep.Keep = keep;
       vaultKeep.VaultKeepId = vaultKeep.Id;
       return vaultKeep;
-    }, new {vaultId}).AsList();
+    }, new { vaultId }).AsList();
     return vaultKeeps;
+  }
+
+  internal List<VaultKeepKeep> GetVaultKeepKeepsByVaultId(int vaultId)
+  {
+    string sql = "SELECT keepId FROM vaultKeeps WHERE vaultId = 7;";
+    List<int> keepIds = _db.Query<int>(sql, new { vaultId }).AsList();
+    List<VaultKeepKeep> variable = new List<VaultKeepKeep>();
+    // keepIds.ForEach(kId =>
+    // {
+    //   VaultKeepKeep keep = _keepsRepository.GetVaultKeepKeepByKeepId(kId);
+    //   // FIXME - make variable have keep with id
+    // });
+    for (int i = 0; i < keepIds.Count; i++ ) {
+      Keep keep = _keepsRepository.GetKeepById(keepIds[i]);
+      VaultKeepKeep vaultKeepKeep = new VaultKeepKeep(keep);
+      variable.Add(vaultKeepKeep);
+    }
+    return variable;
   }
 
   internal VaultKeep GetVaultKeepById(int vaultKeepId)
@@ -53,13 +75,14 @@ public class VaultKeepsRepository : BaseRepository
     JOIN vaults v ON v.id = vk.vaultId
     JOIN keeps k ON k.id = vk.keepId
     WHERE vk.id = @vaultKeepId;";
-    List<VaultKeep> vaultKeeps = _db.Query<VaultKeep, Profile, Vault, Keep, VaultKeep>(sql, (vaultKeep, profile, vault, keep) => {
+    List<VaultKeep> vaultKeeps = _db.Query<VaultKeep, Profile, Vault, Keep, VaultKeep>(sql, (vaultKeep, profile, vault, keep) =>
+    {
       vaultKeep.Creator = profile;
       vaultKeep.Vault = vault;
       vaultKeep.Keep = keep;
       vaultKeep.VaultKeepId = vaultKeep.Id;
       return vaultKeep;
-    }, new {vaultKeepId}).AsList();
+    }, new { vaultKeepId }).AsList();
     VaultKeep vaultKeep = vaultKeeps[0];
     return vaultKeep;
   }
@@ -67,8 +90,9 @@ public class VaultKeepsRepository : BaseRepository
   internal void DeleteVaultKeep(int id)
   {
     string sql = "DELETE FROM vaultKeeps WHERE id = @id";
-    int rowsAffected = _db.Execute(sql, new {id});
-    if (rowsAffected == 0) {
+    int rowsAffected = _db.Execute(sql, new { id });
+    if (rowsAffected == 0)
+    {
       throw new Exception("Unable to delete vault keep!");
     }
   }

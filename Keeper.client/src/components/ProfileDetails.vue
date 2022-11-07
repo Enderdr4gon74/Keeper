@@ -1,7 +1,7 @@
 <template>
   <div class="row position-relative">
     <div class="col-12">
-      <img v-if="profile.coverImg" :src="profile.coverImg" alt="CoverImg" class="img-fluid w-100">
+      <img v-if="profile.coverImg" :src="profile.coverImg" alt="CoverImg" class="img-fluid w-100 h-spec">
       <img v-else src="https://imgs.search.brave.com/DPgSAXjF6fyKVK5oNxP9f79QxxtzZzyVZvIlrEQ_BLE/rs:fit:1200:1200:1/g:ce/aHR0cHM6Ly93YWxs/cGFwZXJjYXZlLmNv/bS93cC93cDI2OTgx/MDAuanBn" alt="CoverImg" class="img-fluid h-100">
     </div>
     <div class="col-3 position-absolute bottom-0 start-50 profileImg">
@@ -55,5 +55,11 @@ export default {
 
 .pt-spec {
   padding-top: 7.5rem;
+}
+
+.h-spec {
+  max-height: 30vh;
+  object-fit: cover;
+  object-position: center;
 }
 </style>

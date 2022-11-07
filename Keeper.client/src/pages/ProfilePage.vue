@@ -4,11 +4,16 @@
       <ProfileDetails :profile="profile" :profileKeepsCount="profileKeeps.length" :profileVaultsCount="profileVaults.length" />
     </div>
     <div class="col-12">
+      <h1 class="fw-bold ms-2">Vaults</h1>
       <div class="row">
+        <div v-for="v in profileVaults" class="col-3">
+          <VaultCard :vault="v" />
+        </div>
         <!-- TODO enter vault components in here -->
       </div>
     </div>
     <div class="col-12">
+      <h1 class="fw-bold ms-2">Keeps</h1>
       <div class="w-100 columns p-2">
         <div class="p-2" v-for="k in profileKeeps" :key="k.id">
           <KeepCard :keep="k" />
@@ -27,6 +32,7 @@ import { useRoute } from 'vue-router';
 import { computed } from '@vue/reactivity';
 import { AppState } from "../AppState.js"
 import ProfileDetails from '../components/ProfileDetails.vue';
+import VaultCard from '../components/VaultCard.vue';
 
 export default {
     setup() {
@@ -66,7 +72,7 @@ export default {
             profileKeeps: computed(() => AppState.profileKeeps)
         };
     },
-    components: { ProfileDetails }
+    components: { ProfileDetails, VaultCard }
 }
 </script>
 
