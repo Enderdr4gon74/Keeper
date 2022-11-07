@@ -4,7 +4,9 @@
   </div>
   <div v-if="activeKeep" class="col-8 text-spec d-flex flex-column justify-content-between">
     <div class="row">
-      <div class="col-3"></div>
+      <div class="col-3 pt-2 ps-2">
+        <button @click="deleteKeep(activeKeep.id)" data-bs-dismiss="modal" v-if="activeKeep.creatorId == account.id" class="btn btn-outline-danger border-0 py-1 px-2"><i class="mdi mdi-delete-forever fs-4"></i></button>
+      </div>
       <div class="col-6 d-flex justify-content-center align-items-center gap-3 py-2">
         <h4 class="m-0"><i class="mdi mdi-eye-outline"></i> {{activeKeep.views}}</h4>
         <div class="d-flex align-items-center">
@@ -31,7 +33,6 @@
         </div>
       </div>
       <div class="col-6 gap-1 py-1">
-        <!-- TODO add router push to profile page here -->
         <RouterLink :to="{name: 'Profile', params: {id: activeKeep.creatorId}}"> 
           <div data-bs-dismiss="modal" class="w-100 d-flex justify-content-end align-items-center">
             <img :src="activeKeep.creator.picture" :alt="activeKeep.creator.name" :title="activeKeep.creator.name" class="creator-img">
@@ -47,12 +48,21 @@
 <script>
 import { computed } from '@vue/reactivity';
 import { AppState } from '../AppState.js';
+import { keepsService } from '../services/KeepsService.js';
+import Pop from '../utils/Pop.js';
 
 export default {
   setup(){
     return {
       activeKeep: computed(()=> AppState.activeKeep),
-      account: computed(()=> AppState.account)
+      account: computed(()=> AppState.account),
+      async deleteKeep(keepId) {
+        try {
+          await keepsService.deleteKeep(keepId)
+        } catch (error) {
+          Pop.error(error, "[Deleting Keep]")
+        }
+      }
     }
   }
 }

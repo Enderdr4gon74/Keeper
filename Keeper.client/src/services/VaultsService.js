@@ -15,6 +15,13 @@ class VaultsService {
     const vaultKeeps = await api.get(`/api/vaults/${vaultId}/keeps`)
     AppState.vaultKeeps = vaultKeeps.data.map(vK => new VaultKeep(vK))
   }
+
+  async createVault(vaultData) {
+    console.log(vaultData)
+    await api.post("/api/vaults", vaultData)
+    // TODO possibly router push to new vault page
+    // TODO possibly add if statements that make new vault appear
+  }
 }
 
 export const vaultsService = new VaultsService();

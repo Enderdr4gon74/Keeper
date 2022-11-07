@@ -14,6 +14,32 @@
       </div>
     </div>
   </div>
+  <div class="modal fade" id="CreateKeepModal" tabindex="-1" aria-labelledby="CreateKeepModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="CreateKeepModalLabel">Create Keep</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <CreateKeepForm />
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="modal fade" id="CreateVaultModal" tabindex="-1" aria-labelledby="CreateVaultModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="CreateVaultModalLabel">Create Vault</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <CreateVaultForm />
+        </div>
+      </div>
+    </div>
+  </div>
    <!-- <footer class="bg-dark text-light">
     Made with 💖 by CodeWorks
   </footer> -->
@@ -22,6 +48,8 @@
 <script>
 import { computed } from 'vue'
 import { AppState } from './AppState'
+import CreateKeepForm from './components/CreateKeepForm.vue'
+import CreateVaultForm from './components/CreateVaultForm.vue'
 import KeepInfo from './components/KeepInfo.vue'
 import Navbar from './components/Navbar.vue'
 
@@ -31,7 +59,7 @@ export default {
       appState: computed(() => AppState)
     }
   },
-  components: { Navbar, KeepInfo }
+  components: { Navbar, KeepInfo, CreateKeepForm, CreateVaultForm }
 }
 </script>
 <style lang="scss">

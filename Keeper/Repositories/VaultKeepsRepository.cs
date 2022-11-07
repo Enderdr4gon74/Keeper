@@ -46,7 +46,7 @@ public class VaultKeepsRepository : BaseRepository
 
   internal List<VaultKeepKeep> GetVaultKeepKeepsByVaultId(int vaultId)
   {
-    string sql = "SELECT keepId FROM vaultKeeps WHERE vaultId = 7;";
+    string sql = "SELECT keepId FROM vaultKeeps WHERE vaultId = @vaultId;";
     List<int> keepIds = _db.Query<int>(sql, new { vaultId }).AsList();
     List<VaultKeepKeep> variable = new List<VaultKeepKeep>();
     // keepIds.ForEach(kId =>

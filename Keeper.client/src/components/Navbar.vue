@@ -23,6 +23,17 @@
             About
           </router-link>
         </li>
+        <li v-if="account.id">
+          <div class="dropdown">
+            <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Create
+            </button>
+            <ul class="dropdown-menu">
+              <li data-bs-toggle="modal" data-bs-target="#CreateKeepModal" class="dropdown-item"> New Keep </li>
+              <li data-bs-toggle="modal" data-bs-target="#CreateVaultModal" class="dropdown-item"> New Vault </li>
+            </ul>
+          </div>
+        </li>
       </ul>
       <!-- LOGIN COMPONENT HERE -->
       <Login />
@@ -31,10 +42,14 @@
 </template>
 
 <script>
+import { computed } from '@vue/reactivity';
+import { AppState } from '../AppState.js';
 import Login from './Login.vue'
 export default {
   setup() {
-    return {}
+    return {
+      account: computed(()=> AppState.account)
+    }
   },
   components: { Login }
 }
