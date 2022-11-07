@@ -1,44 +1,64 @@
 <template>
-  <div class="home flex-grow-1 d-flex flex-column align-items-center justify-content-center">
-    <div class="home-card p-5 bg-white rounded elevation-3">
-      <img
-        src="https://bcw.blob.core.windows.net/public/img/8600856373152463"
-        alt="CodeWorks Logo"
-        class="rounded-circle"
-      >
-      <h1 class="my-5 bg-dark text-white p-3 rounded text-center">
-        Vue 3 Starter
-      </h1>
+  <section class="container-fluid">
+    <div class="row">
+      <div class="col-12 columns p-2">
+        <div class="p-2" v-for="k in keeps" :key="k.id">
+          <KeepCard :keep="k" />
+        </div>
+      </div>
     </div>
-  </div>
+  </section>
 </template>
 
 <script>
+import { onMounted } from 'vue';
+import Pop from '../utils/Pop.js';
+import { keepsService } from "../services/KeepsService.js"
+import { computed } from '@vue/reactivity';
+import { AppState } from '../AppState.js';
+import KeepCard from '../components/KeepCard.vue';
+
 export default {
-  setup() {
-    return {}
-  }
+    setup() {
+        async function getKeeps() {
+            try {
+                await keepsService.getKeeps();
+            }
+            catch (error) {
+                Pop.error(error, "[Getting Keeps]");
+            }
+        }
+        onMounted(() => {
+            getKeeps();
+        });
+        return {
+            keeps: computed(() => AppState.keeps)
+        };
+    },
+    components: { KeepCard }
 }
 </script>
 
 <style scoped lang="scss">
-.home {
-  display: grid;
-  height: 80vh;
-  place-content: center;
-  text-align: center;
-  user-select: none;
+.columns {
+  columns: 4;
+}
 
-  .home-card {
-    width: 50vw;
+@media screen AND (max-width: 720px) {
+  .columns {
+    columns: 1 !important;
+  }
+}
 
-    >img {
-      height: 200px;
-      max-width: 200px;
-      width: 100%;
-      object-fit: contain;
-      object-position: center;
-    }
+@media screen AND (max-width: 960px) AND (min-width: 721px) {
+  .columns {
+    columns: 2 !important;
+  }
+}
+
+@media screen AND (max-width: 1200px) AND (min-width: 961px) {
+  .columns {
+    columns: 3;
   }
 }
 </style>

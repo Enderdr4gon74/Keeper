@@ -26,18 +26,12 @@ public class VaultsService
   internal List<Vault> GetVaultsByProfileId(string profileId)
   {
     List<Vault> vaults = _vp.GetVaultsByProfileId(profileId);
-    vaults.ForEach((vault) => {
-      int vaultIndex = vaults.FindIndex(v => v.Id == vault.Id);
-      if (vault.IsPrivate) {
-        vaults.RemoveAt(vaultIndex);
-      }
-    });
     return vaults;
   }
 
   internal List<Vault> GetVaultsByAccountId(string userId)
   {
-    List<Vault> vaults = _vp.GetVaultsByProfileId(userId);
+    List<Vault> vaults = _vp.GetVaultsByAccountId(userId);
     return vaults;
   }
 

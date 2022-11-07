@@ -8,4 +8,6 @@ CREATE TABLE IF NOT EXISTS accounts(
   picture varchar(255) COMMENT 'User Picture'
 ) default charset utf8 COMMENT '';
 
+ALTER TABLE accounts ADD coverImg VARCHAR(255);
+
 SELECT * FROM accounts WHERE id = "6329e9f30bd50af94ff220a9";

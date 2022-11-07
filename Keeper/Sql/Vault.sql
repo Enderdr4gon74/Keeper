@@ -13,3 +13,20 @@ CREATE TABLE IF NOT EXISTS vaults(
 ) default charset utf8 COMMENT '';
 
 -- DROP TABLE vaults;
+
+SELECT
+    vault.*,
+    a.*
+    FROM vaults vault
+    JOIN accounts a ON a.id = vault.creatorId
+    WHERE 
+      vault.creatorId = "633cb69e37340e48a68947c1" AND
+      vault.isPrivate != true;
+
+SELECT
+    vault.*,
+    a.*
+    FROM vaults vault
+    JOIN accounts a ON a.id = vault.creatorId
+    WHERE 
+      vault.creatorId = "633cb69e37340e48a68947c1";
