@@ -9,6 +9,13 @@ class KeepsService {
     AppState.keeps = keeps.data.map(k => new Keep(k))
   }
 
+  async getMyKeeps() {
+    AppState.myKeeps = null;
+    const myKeeps = await api.get("/account/keeps")
+    // console.log(myKeeps.data.map(k => new Keep(k)))
+    AppState.myKeeps = myKeeps.data.map(k => new Keep(k));
+  }
+
   async getActiveKeep(id) {
     AppState.activeKeep = null
     const activeKeep = await api.get(`/api/keeps/${id}`);

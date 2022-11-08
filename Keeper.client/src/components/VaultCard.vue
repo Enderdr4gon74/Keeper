@@ -9,6 +9,13 @@
       <div class="col-8 position-absolute bottom-0 start-0 text-light">
         <h1 class="ms-2 text-shadow no-select keep-name">{{vault.name}}</h1>
       </div>
+      <div class="col-3 position-absolute bottom-0 end-0 pb-1" v-if="vault.isPrivate">
+        <div class="p-2 ps-3">
+          <div class="bg-secondary w-100 p-spec rounded-circle d-flex justify-content-center align-items-center">
+            <i class="mdi mdi-lock text-light"></i>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </template>
@@ -43,5 +50,10 @@ export default {
 .keep-name {
   font-family: 'Merienda', cursive;
   font-size: xx-large;
+}
+
+.p-spec {
+  padding-top: 0.425rem;
+  padding-bottom: 0.425rem;
 }
 </style>

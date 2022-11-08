@@ -4,15 +4,16 @@ import { Vault } from "./Vault.js"
 
 export class VaultKeep {
   constructor(data) {
+    this.id = data.id
     this.creatorId = data.creatorId
     this.creator = new Profile(data.creator)
-    this.id = data.id
-    this.vaultKeepId = data.vaultKeepId
     this.createdAt = data.createdAt
     this.updatedAt = data.updatedAt
-    this.vaultId = data.vaultId
-    this.vault = new Vault(data.vault)
-    this.keepId = data.keepId
-    this.keep = new Keep(data.keep)
+    this.name = data.name
+    this.description = data.description
+    this.img = data.img
+    this.views = data.views
+    this.kept = data.kept
+    this.vaultKeepId = data.vaultKeepId
   }
 }

@@ -8,24 +8,22 @@
       <img :src="profile.picture" :alt="profile.name" :title="profile.name" class="img-fluid w-100 rounded-circle shadow">
     </div>
   </div>
-  <div class="row pt-5">
-    <!-- <div class="col-12 d-flex justify-content-end align-items-start p-2">
+  <div class="row">
+    <div class="col-12 d-flex justify-content-end align-items-start p-2">
       <div class="dropdown">
         <button class="btn btn-outline-secondary border-0" type="button" data-bs-toggle="dropdown" aria-expanded="false">
           <i class="mdi mdi-dots-horizontal"></i>
         </button>
         <ul class="dropdown-menu">
-          <li><a class="dropdown-item" href="#">Action</a></li>
-          <li><a class="dropdown-item" href="#">Another action</a></li>
-          <li><a class="dropdown-item" href="#">Something else here</a></li>
+          <li data-bs-toggle="modal" data-bs-target="#EditAccountModal" class="selectable ps-2">Edit Account</li>
         </ul>
       </div>
-    </div> -->
+    </div>
     <div class="col-12 pt-spec text-center">
       <h1>{{profile.name}}</h1>
       <p v-if="profileKeepsCount == 1 && profileVaultsCount == 1">{{profileVaultsCount}} Vault | {{profileKeepsCount}} Keep</p>
-      <p v-if="profileVaultsCount == 1 && profileKeepsCount != 1">{{profileVaultsCount}} Vault | {{profileKeepsCount}} Keeps</p>
-      <p v-if="profileKeepsCount != 1 && profileVaultsCount == 1">{{profileVaultsCount}} Vaults | {{profileKeepsCount}} Keep</p>
+      <p v-else-if="profileVaultsCount == 1 && profileKeepsCount != 1">{{profileVaultsCount}} Vault | {{profileKeepsCount}} Keeps</p>
+      <p v-else-if="profileKeepsCount != 1 && profileVaultsCount == 1">{{profileVaultsCount}} Vaults | {{profileKeepsCount}} Keep</p>
       <p v-else>{{profileVaultsCount}} Vaults | {{profileKeepsCount}} Keeps</p>
     </div>
   </div>
@@ -33,11 +31,11 @@
 
 
 <script>
-import { Profile } from '../models/Profile.js';
+import { Account } from '../models/Account.js';
 
 export default {
   props: {
-    profile: { type: Profile, required: true},
+    profile: { type: Account, required: true},
     profileVaultsCount: { type: Number, required: true},
     profileKeepsCount: { type: Number, required: true},
   },
@@ -54,7 +52,7 @@ export default {
 }
 
 .pt-spec {
-  padding-top: 7.5rem;
+  padding-top: 6rem;
 }
 
 .h-spec {

@@ -36,13 +36,13 @@ public class VaultKeepsService
     return check;
   }
 
-  internal List<VaultKeep> GetVaultKeepsByVaultId(int vaultId)
+  internal List<VaultKeepKeep> GetVaultKeepsByVaultId(int vaultId)
   {
     Vault vault = _vs.GetVaultById(vaultId);
-    if (vault.IsPrivate) {
-      throw new Exception("Your chose the wrong vault to get foul!");
-    }
-    List<VaultKeep> vaultKeeps = _vkr.GetVaultKeepsByVaultId(vaultId);
+    // if (vault.IsPrivate) {
+    //   throw new Exception("Your chose the wrong vault to get foul!");
+    // }
+    List<VaultKeepKeep> vaultKeeps = _vkr.GetVaultKeepKeepsByVaultId(vaultId);
     return vaultKeeps;
   }
 

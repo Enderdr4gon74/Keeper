@@ -17,9 +17,9 @@ public class VaultsService
   internal Vault GetVaultById(int id)
   {
     Vault vault = _vp.GetVaultById(id);
-    if (vault.IsPrivate){
-      throw new Exception("Unfortunately this vault is private!");
-    }
+    // if (vault.IsPrivate){
+    //   throw new Exception("Unfortunately this vault is private!");
+    // }
     return vault;
   }
 

@@ -2,7 +2,7 @@
   <div class="w-100 p-2">
     <div class="row position-relative">
       <div class="col-12">
-        <img data-bs-toggle="modal" data-bs-target="#KeepModal" @click="getActiveKeep(keep.id)" :src="keep.img" :alt="keep.name" :title="keep.name" class="img-fluid w-100 rounded-4 selectable">
+        <img data-bs-toggle="modal" data-bs-target="#KeepModal" @click="getActiveKeep(keep.id)" :src="keep.img" :alt="keep.name" :title="keep.name" class="img-fluid w-100 rounded-4 selectable elevation-2">
       </div>
       <div class="col-8 position-absolute bottom-0 start-0 text-light">
         <h1 class="ms-2 text-shadow no-select keep-name">{{keep.name}}</h1>

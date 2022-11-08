@@ -46,20 +46,27 @@ public class VaultKeepsRepository : BaseRepository
 
   internal List<VaultKeepKeep> GetVaultKeepKeepsByVaultId(int vaultId)
   {
-    string sql = "SELECT keepId FROM vaultKeeps WHERE vaultId = @vaultId;";
-    List<int> keepIds = _db.Query<int>(sql, new { vaultId }).AsList();
-    List<VaultKeepKeep> variable = new List<VaultKeepKeep>();
-    // keepIds.ForEach(kId =>
-    // {
-    //   VaultKeepKeep keep = _keepsRepository.GetVaultKeepKeepByKeepId(kId);
-    //   // FIXME - make variable have keep with id
-    // });
-    for (int i = 0; i < keepIds.Count; i++ ) {
-      Keep keep = _keepsRepository.GetKeepById(keepIds[i]);
-      VaultKeepKeep vaultKeepKeep = new VaultKeepKeep(keep);
-      variable.Add(vaultKeepKeep);
+    string sql = @"
+    SELECT 
+      k.*,
+      a.*,
+      vk.*,
+      vk.id as vaultKeepId
+      FROM vaultKeeps vk
+      JOIN keeps k on k.id = vk.keepId
+      JOIN accounts a ON a.id = k.creatorId
+      WHERE vaultId = @vaultId;";
+    List<VaultKeepKeep> vaultKeepKeeps = _db.Query<VaultKeepKeep, Profile, VaultKeep, VaultKeepKeep>(sql, (vaultKeepKeep, profile, vaultKeep) =>
+    {
+      vaultKeepKeep.Creator = profile;
+      vaultKeepKeep.VaultKeepId = vaultKeep.Id;
+      return vaultKeepKeep;
+    }, new {vaultId}).AsList();
+    for (int i = 0; i < vaultKeepKeeps.Count; i++) {
+      Console.WriteLine(vaultKeepKeeps[i].VaultKeepId);
+      Console.WriteLine(vaultKeepKeeps[i].Id);
     }
-    return variable;
+    return vaultKeepKeeps;
   }
 
   internal VaultKeep GetVaultKeepById(int vaultKeepId)

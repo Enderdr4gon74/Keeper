@@ -19,4 +19,13 @@ SELECT
     FROM vaultKeeps vk
     WHERE vk.vaultId = 20;
 
-SELECT keepId FROM vaultKeeps WHERE `vaultId` = 7;
+SELECT 
+  k.*,
+  a.*,
+  vk.id as vaultKeepId
+  FROM vaultKeeps vk
+  JOIN keeps k on k.id = vk.keepId
+  JOIN accounts a ON a.id = k.creatorId
+  WHERE vaultId = 7;
+
+SELECT * FROM `vaultKeeps` WHERE `vaultId` = 78;

@@ -49,24 +49,22 @@ public class KeepsRepository : BaseRepository
     return keep;
   }
 
-  internal VaultKeepKeep GetVaultKeepKeepByKeepId(int id)
-  {
-    string sql = @"
-    SELECT
-    keep.*,
-    a.*
-    FROM keeps keep
-    JOIN accounts a ON a.id = keep.creatorId
-    WHERE keep.id = @id;";
-    List<Keep> keeps = _db.Query<Keep, Profile, Keep>(sql, (keep, profile)=> {
-      keep.Creator = profile;
-      return keep;
-    }, new {id}).AsList();
-    Keep keep = keeps[0];
-    VaultKeepKeep vaultKeepKeep = new VaultKeepKeep(keep);
-    vaultKeepKeep.VaultKeepId = id;
-    return vaultKeepKeep;
-  }
+  // internal VaultKeepKeep GetVaultKeepKeepByKeepId(int id)
+  // {
+  //   string sql = @"
+  //   SELECT
+  //   keep.*,
+  //   a.*
+  //   FROM keeps keep
+  //   JOIN accounts a ON a.id = keep.creatorId
+  //   WHERE keep.id = @id;";
+  //   List<Keep> keeps = _db.Query<Keep, Profile, Keep>(sql, (keep, profile)=> {
+  //     keep.Creator = profile;
+  //     return keep;
+  //   }, new {id}).AsList();
+  //   Keep keep = keeps[0];
+  //   return vaultKeepKeep;
+  // }
 
   internal List<Keep> GetKeepsByProfileId(string profileId)
   {

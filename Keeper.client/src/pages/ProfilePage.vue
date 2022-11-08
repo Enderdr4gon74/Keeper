@@ -9,7 +9,6 @@
         <div v-for="v in profileVaults" class="col-3">
           <VaultCard :vault="v" />
         </div>
-        <!-- TODO enter vault components in here -->
       </div>
     </div>
     <div class="col-12">

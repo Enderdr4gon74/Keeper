@@ -5,37 +5,57 @@
   <main class="container-fluid">
     <router-view />
   </main>
-  <div class="modal fade" id="KeepModal" tabindex="-1" aria-hidden="true">
-    <div class="modal-dialog modal-xl">
-      <div class="modal-content">
-        <div class="modal-body row px-2-5 py-0">
-          <KeepInfo />
+  <!-- SECTION modals -->
+  <div>
+    <!-- STUB Keep Info Modal -->
+    <div class="modal fade" id="KeepModal" tabindex="-1" aria-hidden="true">
+      <div class="modal-dialog modal-xl">
+        <div class="modal-content">
+          <div class="modal-body row px-2-5 py-0">
+            <KeepInfo />
+          </div>
         </div>
       </div>
     </div>
-  </div>
-  <div class="modal fade" id="CreateKeepModal" tabindex="-1" aria-labelledby="CreateKeepModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h1 class="modal-title fs-5" id="CreateKeepModalLabel">Create Keep</h1>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body">
-          <CreateKeepForm />
+    <!-- STUB Create Keep Modal -->
+    <div class="modal fade" id="CreateKeepModal" tabindex="-1" aria-labelledby="CreateKeepModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h1 class="modal-title fs-5" id="CreateKeepModalLabel">Create Keep</h1>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <CreateKeepForm />
+          </div>
         </div>
       </div>
     </div>
-  </div>
-  <div class="modal fade" id="CreateVaultModal" tabindex="-1" aria-labelledby="CreateVaultModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h1 class="modal-title fs-5" id="CreateVaultModalLabel">Create Vault</h1>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+    <!-- STUB Create Vault Modal -->
+    <div class="modal fade" id="CreateVaultModal" tabindex="-1" aria-labelledby="CreateVaultModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h1 class="modal-title fs-5" id="CreateVaultModalLabel">Create Vault</h1>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <CreateVaultForm />
+          </div>
         </div>
-        <div class="modal-body">
-          <CreateVaultForm />
+      </div>
+    </div>
+    <!-- STUB Edit Account Modal -->
+    <div class="modal fade" id="EditAccountModal" tabindex="-1" aria-labelledby="EditAccountModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h1 class="modal-title fs-5" id="EditAccountModalLabel">EditAccount</h1>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <EditAccountForm />
+          </div>
         </div>
       </div>
     </div>
@@ -50,6 +70,7 @@ import { computed } from 'vue'
 import { AppState } from './AppState'
 import CreateKeepForm from './components/CreateKeepForm.vue'
 import CreateVaultForm from './components/CreateVaultForm.vue'
+import EditAccountForm from './components/EditAccountForm.vue'
 import KeepInfo from './components/KeepInfo.vue'
 import Navbar from './components/Navbar.vue'
 
@@ -59,7 +80,7 @@ export default {
       appState: computed(() => AppState)
     }
   },
-  components: { Navbar, KeepInfo, CreateKeepForm, CreateVaultForm }
+  components: { Navbar, KeepInfo, CreateKeepForm, CreateVaultForm, EditAccountForm }
 }
 </script>
 <style lang="scss">
