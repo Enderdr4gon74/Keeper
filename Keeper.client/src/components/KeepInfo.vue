@@ -30,6 +30,7 @@
       <div class="col-6 d-flex justify-content-center align-items-center p-2">
         <div class="d-flex gap-2" v-if="account.id">
           <!-- TODO enter save keep form -->
+          <KeepSaveForm :keepId="activeKeep.id" />
         </div>
       </div>
       <div class="col-6 gap-1 py-1">
@@ -50,21 +51,24 @@ import { computed } from '@vue/reactivity';
 import { AppState } from '../AppState.js';
 import { keepsService } from '../services/KeepsService.js';
 import Pop from '../utils/Pop.js';
+import KeepSaveForm from './KeepSaveForm.vue';
 
 export default {
-  setup(){
-    return {
-      activeKeep: computed(()=> AppState.activeKeep),
-      account: computed(()=> AppState.account),
-      async deleteKeep(keepId) {
-        try {
-          await keepsService.deleteKeep(keepId)
-        } catch (error) {
-          Pop.error(error, "[Deleting Keep]")
-        }
-      }
-    }
-  }
+    setup() {
+        return {
+            activeKeep: computed(() => AppState.activeKeep),
+            account: computed(() => AppState.account),
+            async deleteKeep(keepId) {
+                try {
+                    await keepsService.deleteKeep(keepId);
+                }
+                catch (error) {
+                    Pop.error(error, "[Deleting Keep]");
+                }
+            }
+        };
+    },
+    components: { KeepSaveForm }
 }
 </script>
 

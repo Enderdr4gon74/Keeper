@@ -1,10 +1,13 @@
 <template>
-  <header>
+  <header class="topNav sticky-top">
     <Navbar />
   </header>
   <main class="container-fluid">
     <router-view />
   </main>
+  <!-- <footer class="bottomNav bg-dark sticky-bottom pb-5">
+    <Navbar />
+  </footer> -->
   <!-- SECTION modals -->
   <div>
     <!-- STUB Keep Info Modal -->
@@ -59,10 +62,21 @@
         </div>
       </div>
     </div>
+    <!-- STUB Edit Account Modal -->
+    <div class="modal fade" id="EditVaultModal" tabindex="-1" aria-labelledby="EditVaultModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h1 class="modal-title fs-5" id="EditVaultModalLabel"> Edit Vault </h1>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <EditVaultForm />
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
-   <!-- <footer class="bg-dark text-light">
-    Made with 💖 by CodeWorks
-  </footer> -->
 </template>
 
 <script>
@@ -71,6 +85,7 @@ import { AppState } from './AppState'
 import CreateKeepForm from './components/CreateKeepForm.vue'
 import CreateVaultForm from './components/CreateVaultForm.vue'
 import EditAccountForm from './components/EditAccountForm.vue'
+import EditVaultForm from './components/EditVaultForm.vue'
 import KeepInfo from './components/KeepInfo.vue'
 import Navbar from './components/Navbar.vue'
 
@@ -80,7 +95,7 @@ export default {
       appState: computed(() => AppState)
     }
   },
-  components: { Navbar, KeepInfo, CreateKeepForm, CreateVaultForm, EditAccountForm }
+  components: { Navbar, KeepInfo, CreateKeepForm, CreateVaultForm, EditAccountForm, EditVaultForm }
 }
 </script>
 <style lang="scss">
@@ -101,4 +116,22 @@ footer {
   padding-left: 0.75rem;
   padding-right: 0.75rem;
 }
+
+// .topNav {
+//   display: block;
+// }
+
+// .bottomNav {
+//   display: none;
+// }
+
+// @media screen AND (max-width: 960px) {
+//   .topNav {
+//     display: none;
+//   }
+
+//   .bottomNav {
+//     display: block;
+//   }
+// }
 </style>

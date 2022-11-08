@@ -28,12 +28,14 @@ class KeepsService {
   }
 
   async deleteKeep(keepId) {
-    console.log(keepId)
-    const data = await api.delete(`/api/keeps/${keepId}`)
-    const message = data.data
-    Pop.success(message)
-    const keepIndex = AppState.keeps.findIndex(k => k.id == keepId);
-    AppState.keeps.splice(keepIndex, 1);
+    if(await Pop.confirm("Are you sure you want to delete this Keep?")) {
+      // console.log(keepId)
+      const data = await api.delete(`/api/keeps/${keepId}`)
+      const message = data.data
+      Pop.success(message)
+      const keepIndex = AppState.keeps.findIndex(k => k.id == keepId);
+      AppState.keeps.splice(keepIndex, 1);
+    }
   }
 }
 

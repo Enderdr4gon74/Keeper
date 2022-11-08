@@ -10,16 +10,24 @@ class VaultsService {
     AppState.vault = null
     const vault = await api.get(`/api/vaults/${vaultId}`)
     const newVault = new Vault(vault.data)
-    if (AppState.account.id) {
-      if (newVault.isPrivate && AppState.account.id != newVault.creatorId) {
+    if (newVault.isPrivate) {
+      if (AppState.account.id) {
+        if (AppState.account.id == newVault.creatorId) {
+          // If vault is private, user is logged in, and the user is the creator of the vault
+          AppState.vault = new Vault(vault.data);
+        } else {
+          // If vault is private, user is logged in, and the user is not the creator of the vault
+          router.push({name: "Home"})
+          Pop.toast("Unfortunately that vault is private", "warning")
+        }
+      } else {
+        // If vault is private and the user is not logged in
         router.push({name: "Home"})
         Pop.toast("Unfortunately that vault is private", "warning")
-      } else {
-        AppState.vault = new Vault(vault.data);
       }
     } else {
-      router.push({name: "Home"})
-      Pop.toast("Unfortunately that vault is private", "warning")
+      // if the vault is public
+      AppState.vault = new Vault(vault.data);
     }
   }
 
@@ -40,6 +48,24 @@ class VaultsService {
     await api.post("/api/vaults", vaultData)
     // TODO possibly router push to new vault page
     // TODO possibly add if statements that make new vault appear
+  }
+
+  async editVault(vaultData) {
+    console.log(vaultData)
+    const newVault = await api.put(`/api/vaults/${vaultData.id}`, vaultData)
+    AppState.vault = new Vault(newVault.data);
+    const vaultIndex = AppState.myVaults.findIndex(v => v.id == newVault.id)
+    AppState.myVaults.splice(vaultIndex, 1)
+  }
+
+  async deleteVault(vaultId) {
+    if (await Pop.confirm("Are You Sure you want to delete this vault")) {
+      await api.delete(`/api/vaults/${vaultId}`)
+      const vaultIndex = AppState.myVaults.findIndex(v => v.id == vaultId)
+      AppState.myVaults.splice(vaultIndex, 1)
+      router.push({name: "Home"})
+      Pop.toast(" Vault Deleted ", "success")
+    }
   }
 }
 

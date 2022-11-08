@@ -4,12 +4,12 @@
       <div class="col-12">
         <img data-bs-toggle="modal" data-bs-target="#KeepModal" @click="getActiveKeep(keep.id)" :src="keep.img" :alt="keep.name" :title="keep.name" class="img-fluid w-100 rounded-4 selectable elevation-2">
       </div>
-      <div class="col-8 position-absolute bottom-0 start-0 text-light">
+      <div class="col-8 position-absolute bottom-0 start-0 text-light overflow-hidden">
         <h1 class="ms-2 text-shadow no-select keep-name">{{keep.name}}</h1>
       </div>
       <div class="col-2 position-absolute bottom-0 end-0 pb-1">
         <RouterLink :to="{name: 'Profile', params: {id: keep.creatorId}}">
-          <img :src="keep.creator.picture" :alt="keep.creator.name" :title="keep.creator.name" class="img-fluid w-100 rounded-circle creator-picture pe-1">
+          <img :src="keep.creator.picture" :alt="keep.creator.name" :title="keep.creator.name" class="img-fluid w-100 rounded-circle creator-picture pe-1 elevation-1">
         </RouterLink>
       </div>
     </div>
