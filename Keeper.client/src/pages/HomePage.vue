@@ -7,7 +7,7 @@
     </div>
   </section>
   <div v-else class="row justify-content-center align-items-center">
-    <div class="col-5">
+    <div class="col-10 col-sm-5">
       <img src="https://media1.giphy.com/media/3o7TKtnuHOHHUjR38Y/giphy.gif?cid=6c09b952um0m52mj4i3ec61o3vz9jy1wu7vcresa4fjvnyeu&rid=giphy.gif&ct=s" alt="loading..." class="img-fluid w-100">
     </div>
   </div>

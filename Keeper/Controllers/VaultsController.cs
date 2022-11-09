@@ -35,11 +35,17 @@ public class VaultsController : ControllerBase
   }
 
   [HttpGet("{id}")]
-  public ActionResult<Vault> GetVaultById(int id)
+  public async  Task<ActionResult<Vault>> GetVaultById(int id)
   {
     try
     {
-      Vault vault = _vs.GetVaultById(id);
+      Account userInfo = await _auth0provider.GetUserInfoAsync<Account>(HttpContext);
+      Vault vault;
+      if (userInfo != null) {
+        vault = _vs.GetVaultById(id, userInfo.Id);
+      } else {
+        vault = _vs.GetVaultById(id);
+      }
       return Ok(vault);
     }
     catch (System.Exception ex)
@@ -49,11 +55,17 @@ public class VaultsController : ControllerBase
   }
 
   [HttpGet("{id}/keeps")]
-  public ActionResult<List<VaultKeepKeep>> GetVaultKeepsByVaultId(int id)
+  public async Task<ActionResult<List<VaultKeepKeep>>> GetVaultKeepsByVaultId(int id)
   {
     try
     {
-      List<VaultKeepKeep> vaultKeeps = _vks.GetVaultKeepsByVaultId(id);
+      Account userInfo = await _auth0provider.GetUserInfoAsync<Account>(HttpContext);
+      List<VaultKeepKeep> vaultKeeps;
+      if (userInfo != null) {
+        vaultKeeps = _vks.GetVaultKeepsByVaultId(id, userInfo.Id);
+      } else {
+        vaultKeeps = _vks.GetVaultKeepsByVaultId(id);
+      }
       return Ok(vaultKeeps);
     }
     catch (System.Exception ex)

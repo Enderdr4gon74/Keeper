@@ -10,25 +10,26 @@ class VaultsService {
     AppState.vault = null
     const vault = await api.get(`/api/vaults/${vaultId}`)
     const newVault = new Vault(vault.data)
-    if (newVault.isPrivate) {
-      if (AppState.account.id) {
-        if (AppState.account.id == newVault.creatorId) {
-          // If vault is private, user is logged in, and the user is the creator of the vault
-          AppState.vault = new Vault(vault.data);
-        } else {
-          // If vault is private, user is logged in, and the user is not the creator of the vault
-          router.push({name: "Home"})
-          Pop.toast("Unfortunately that vault is private", "warning")
-        }
-      } else {
-        // If vault is private and the user is not logged in
-        router.push({name: "Home"})
-        Pop.toast("Unfortunately that vault is private", "warning")
-      }
-    } else {
-      // if the vault is public
-      AppState.vault = new Vault(vault.data);
-    }
+    AppState.vault = new Vault(vault.data);
+    // if (newVault.isPrivate) {
+    //   if (AppState.account.id) {
+    //     if (AppState.account.id == newVault.creatorId) {
+    //       // If vault is private, user is logged in, and the user is the creator of the vault
+    //       AppState.vault = new Vault(vault.data);
+    //     } else {
+    //       // If vault is private, user is logged in, and the user is not the creator of the vault
+    //       router.push({name: "Home"})
+    //       Pop.toast("Unfortunately that vault is private", "warning")
+    //     }
+    //   } else {
+    //     // If vault is private and the user is not logged in
+    //     router.push({name: "Home"})
+    //     Pop.toast("Unfortunately that vault is private", "warning")
+    //   }
+    // } else {
+    //   // if the vault is public
+    //   AppState.vault = new Vault(vault.data);
+    // }
   }
 
   async getMyVaults() {

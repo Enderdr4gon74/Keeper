@@ -14,12 +14,14 @@ public class VaultsService
     return _vp.CreateVault(vaultData);
   }
 
-  internal Vault GetVaultById(int id)
+  internal Vault GetVaultById(int id, string userId = "")
   {
     Vault vault = _vp.GetVaultById(id);
-    // if (vault.IsPrivate){
-    //   throw new Exception("Unfortunately this vault is private!");
-    // }
+    if (vault.IsPrivate){
+      if (vault.CreatorId != userId) {
+        throw new Exception("Unfortunately this vault is private!");
+      }
+    }
     return vault;
   }
 

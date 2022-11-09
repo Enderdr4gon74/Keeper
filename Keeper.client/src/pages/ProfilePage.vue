@@ -5,8 +5,8 @@
     </div>
     <div class="col-12">
       <h1 class="fw-bold ms-2">Vaults</h1>
-      <div class="row">
-        <div v-for="v in profileVaults" class="col-3">
+      <div class="w-100 columns p-2">
+        <div v-for="v in profileVaults" class="">
           <VaultCard :vault="v" />
         </div>
       </div>
@@ -21,7 +21,7 @@
     </div>
   </div>
   <div v-else class="row justify-content-center align-items-center">
-    <div class="col-5">
+    <div class="col-10 col-sm-5">
       <img src="https://media1.giphy.com/media/3o7TKtnuHOHHUjR38Y/giphy.gif?cid=6c09b952um0m52mj4i3ec61o3vz9jy1wu7vcresa4fjvnyeu&rid=giphy.gif&ct=s" alt="loading..." class="img-fluid w-100">
     </div>
   </div>
@@ -36,6 +36,7 @@ import { useRoute } from 'vue-router';
 import { computed } from '@vue/reactivity';
 import { AppState } from "../AppState.js"
 import ProfileDetails from '../components/ProfileDetails.vue';
+import KeepCard from '../components/KeepCard.vue';
 import VaultCard from '../components/VaultCard.vue';
 
 export default {
@@ -76,7 +77,7 @@ export default {
             profileKeeps: computed(() => AppState.profileKeeps)
         };
     },
-    components: { ProfileDetails, VaultCard }
+    components: { ProfileDetails, VaultCard, KeepCard }
 }
 </script>
 

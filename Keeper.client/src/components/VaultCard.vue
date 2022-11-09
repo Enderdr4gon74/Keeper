@@ -2,11 +2,11 @@
   <div class="w-100 p-2">
     <div class="row position-relative">
       <div class="col-12">
-        <RouterLink :to="{name: 'Vault', params: {id: vault.id}}">
+        <RouterLink :to="{name: 'Vault', params: {id: vault.id}}"  aria-label="To Vault Page" title="To Vault Page">
           <img :src="vault.img" :alt="vault.name" :title="vault.name" class="img-fluid w-100 rounded-4 selectable">
         </RouterLink>
       </div>
-      <div class="col-8 position-absolute bottom-0 start-0 text-light">
+      <div class="col-8 position-absolute bottom-0 start-0 text-light overflow-hidden">
         <h1 class="ms-2 text-shadow no-select keep-name">{{vault.name}}</h1>
       </div>
       <div class="col-3 position-absolute bottom-0 end-0 ps-0" v-if="vault.isPrivate">
@@ -62,5 +62,11 @@ export default {
 
   padding-left: 0.75rem;
   padding-right: 0.75rem;
+}
+
+@media screen AND (max-width: 960px) {
+  .keep-name {
+    font-size: x-large;
+  }
 }
 </style>

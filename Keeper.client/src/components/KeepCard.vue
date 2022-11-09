@@ -8,7 +8,7 @@
         <h1 class="ms-2 text-shadow no-select keep-name">{{keep.name}}</h1>
       </div>
       <div class="col-2 position-absolute bottom-0 end-0 pb-1">
-        <RouterLink :to="{name: 'Profile', params: {id: keep.creatorId}}">
+        <RouterLink :to="{name: 'Profile', params: {id: keep.creatorId}}"  aria-label="To Creator Profile Page" title="To Creator Profile Page">
           <img :src="keep.creator.picture" :alt="keep.creator.name" :title="keep.creator.name" class="img-fluid w-100 rounded-circle creator-picture pe-1 elevation-1">
         </RouterLink>
       </div>
@@ -55,5 +55,11 @@ export default {
 .keep-name {
   font-family: 'Merienda', cursive;
   font-size: xx-large;
+}
+
+@media screen AND (max-width: 960px) {
+  .keep-name {
+    font-size: x-large;
+  }
 }
 </style>

@@ -11,11 +11,11 @@
   <div class="row">
     <div class="col-12 d-flex justify-content-end align-items-start p-2">
       <div class="dropdown">
-        <button class="btn btn-outline-secondary border-0" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+        <button class="btn btn-outline-secondary border-0" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Edit Account Dropdown" title="Edit Account Dropdown">
           <i class="mdi mdi-dots-horizontal"></i>
         </button>
         <ul class="dropdown-menu">
-          <li data-bs-toggle="modal" data-bs-target="#EditAccountModal" class="selectable ps-2">Edit Account</li>
+          <li data-bs-toggle="modal" data-bs-target="#EditAccountModal" class="selectable ps-2" aria-label="Edit Account Button" title="Edit Account Button">Edit Account</li>
         </ul>
       </div>
     </div>

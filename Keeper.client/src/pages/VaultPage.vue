@@ -1,6 +1,6 @@
 <template>
   <div v-if="vault && vaultKeeps" class="row justify-content-center">
-    <div v-if="vault && vaultKeeps" class="col-5 pt-4">
+    <div v-if="vault && vaultKeeps" class="col-10 col-sm-5 pt-4">
       <VaultInfo :vault="vault" :keepCount="vaultKeeps.length" />
     </div>
     <div v-if="vaultKeeps" class="col-9">
@@ -10,7 +10,7 @@
     </div>
   </div>
   <div v-else class="row justify-content-center align-items-center">
-    <div class="col-5">
+    <div class="col-10 col-sm-5">
       <img src="https://media1.giphy.com/media/3o7TKtnuHOHHUjR38Y/giphy.gif?cid=6c09b952um0m52mj4i3ec61o3vz9jy1wu7vcresa4fjvnyeu&rid=giphy.gif&ct=s" alt="loading..." class="img-fluid w-100">
     </div>
   </div>
@@ -26,6 +26,7 @@ import { computed } from '@vue/reactivity';
 import { AppState } from '../AppState.js';
 import VaultInfo from '../components/VaultInfo.vue';
 import VaultKeepCard from '../components/VaultKeepCard.vue';
+import { router } from '../router.js';
 
 export default {
   setup() {
@@ -33,9 +34,11 @@ export default {
     async function getVault() {
       try {
         await vaultsService.getVault(route.params.id);
+        await getVaultKeeps()
       }
       catch (error) {
-        Pop.error(error, "[Getting Vault]");
+        router.push({name: "Home"})
+        Pop.toast("Unfortunately that vault is private", "warning")
       }
     }
     async function getVaultKeeps() {
@@ -43,12 +46,11 @@ export default {
         await vaultsService.getVaultKeeps(route.params.id);
       }
       catch (error) {
-        Pop.error(error, "[Getting Vault Keeps]");
+        
       }
     }
     onMounted(() => {
       getVault()
-      getVaultKeeps()
     });
     return {
       vault: computed(() => AppState.vault),

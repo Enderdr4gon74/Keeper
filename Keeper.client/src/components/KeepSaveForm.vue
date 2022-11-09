@@ -2,12 +2,12 @@
   <form @submit.prevent="handleSubmit()">
     <div class="input-group mb-3">
       <div class="form-floating">
-        <select class="form-select" id="VaultPicker" v-model="editable.vaultId" required>
+        <select class="form-select" id="VaultPicker" v-model="editable.vaultId" required  aria-label="Save Keep To Vault" title="Save Keep To Vault">
           <option v-for="vault in myVaults" :value="vault.id">{{vault.name}}</option>
         </select>
         <label for="VaultPicker">Vaults</label>
       </div>
-      <button type="submit" class="btn btn-success" data-bs-dismiss="modal">Save</button>
+      <button type="submit" class="btn btn-success" data-bs-dismiss="modal"  aria-label="Submit Form And Close Modal" title="Submit Form And Close Modal">Save</button>
     </div>
   </form>
 </template>

@@ -1,11 +1,11 @@
 <template>
-  <div v-if="activeKeep" class="col-4 p-0">
+  <div v-if="activeKeep" class="col-12 col-sm-4 p-0">
     <img :src="activeKeep.img" :alt="activeKeep.name" :title="activeKeep.name" class="img-fluid w-100 rounded-spec">
   </div>
-  <div v-if="activeKeep" class="col-8 text-spec d-flex flex-column justify-content-between">
+  <div v-if="activeKeep" class="col-12 col-sm-8 text-spec d-flex flex-column justify-content-between">
     <div class="row">
       <div class="col-3 pt-2 ps-2">
-        <button @click="deleteKeep(activeKeep.id)" data-bs-dismiss="modal" v-if="activeKeep.creatorId == account.id" class="btn btn-outline-danger border-0 py-1 px-2"><i class="mdi mdi-delete-forever fs-4"></i></button>
+        <button @click="deleteKeep(activeKeep.id)" data-bs-dismiss="modal" v-if="activeKeep.creatorId == account.id" class="btn btn-outline-danger border-0 py-1 px-2" aria-label="Delete Keep" title="Delete Keep"><i class="mdi mdi-delete-forever fs-4"></i></button>
       </div>
       <div class="col-6 d-flex justify-content-center align-items-center gap-3 py-2">
         <h4 class="m-0"><i class="mdi mdi-eye-outline"></i> {{activeKeep.views}}</h4>
@@ -15,7 +15,7 @@
         </div>
       </div>
       <div class="col-3 d-flex justify-content-end align-items-top pt-1 pe-1">
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" title="Close Modal"></button>
       </div>
     </div>
     <div class="row">
@@ -27,14 +27,13 @@
       </div>
     </div>
     <div class="row">
-      <div class="col-6 d-flex justify-content-center align-items-center p-2">
+      <div class="col-12 col-sm-6 d-flex justify-content-center align-items-center p-2">
         <div class="d-flex gap-2" v-if="account.id">
-          <!-- TODO enter save keep form -->
           <KeepSaveForm :keepId="activeKeep.id" />
         </div>
       </div>
-      <div class="col-6 gap-1 py-1">
-        <RouterLink :to="{name: 'Profile', params: {id: activeKeep.creatorId}}"> 
+      <div class="col-12 col-sm-6 d-flex justify-content-center align-items-center gap-1 py-1">
+        <RouterLink :to="{name: 'Profile', params: {id: activeKeep.creatorId}}"  aria-label="To Creator Profile Page" title="To Creator Profile Page"> 
           <div data-bs-dismiss="modal" class="w-100 d-flex justify-content-end align-items-center">
             <img :src="activeKeep.creator.picture" :alt="activeKeep.creator.name" :title="activeKeep.creator.name" class="creator-img">
             <h6 class="text-dark">{{activeKeep.creator.name}}</h6>

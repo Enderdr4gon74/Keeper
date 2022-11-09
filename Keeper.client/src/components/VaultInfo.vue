@@ -20,16 +20,16 @@
       </div>
       <div class="dropdown" v-if="account.id == vault.creatorId">
         <button class="btn btn-outline-secondary border-0 spec-pad d-flex justify-content-center align-items-center"
-          type="button" data-bs-toggle="dropdown" aria-expanded="false">
+          type="button" data-bs-toggle="dropdown" aria-expanded="false"  aria-label="Vault Options Dropdown" title="Vault Options Dropdown">
           <i class="mdi mdi-dots-horizontal fs-5"></i>
         </button>
         <ul class="dropdown-menu">
-          <li data-bs-toggle="modal" data-bs-target="#EditVaultModal" class="dropdown-item"> Edit Vault </li>
-          <li @click="deleteVault(vault.id)" class="dropdown-item text-danger"> Delete Vault </li>
+          <li data-bs-toggle="modal" data-bs-target="#EditVaultModal" class="dropdown-item"  aria-label="Edit Vault" title="Edit Vault"> Edit Vault </li>
+          <li @click="deleteVault(vault.id)" class="dropdown-item text-danger" aria-label="Delete Vault" title="Delete Vault"> Delete Vault </li>
         </ul>
       </div>
     </div>
-    <div class="col-4">
+    <div class="col-6 col-sm-4">
       <div class="bg-secondary p-2 rounded-4 d-flex justify-content-center align-items-center spec-text">
         <h4 v-if="keepCount == 1" class="m-0">{{ keepCount }} Keep</h4>
         <h4 v-else class="m-0">{{ keepCount }} Keeps</h4>
