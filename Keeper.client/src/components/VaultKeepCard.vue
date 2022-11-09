@@ -12,7 +12,7 @@
           <img :src="keep.creator.picture" :alt="keep.creator.name" :title="keep.creator.name" class="img-fluid w-100 rounded-circle creator-picture pe-1 elevation-2">
         </RouterLink>
       </div>
-      <div class="col-3 ps-2 position-absolute top-0 end-0" v-if="keep.creator.id == account.id">
+      <div class="col-3 ps-2 position-absolute top-0 end-0" v-if="keep.vaultKeepCreatorId == account.id">
         <div class="pt-1">
           <button @click="deleteVaultKeep(keep.vaultKeepId)" class="btn btn-outline-danger border-0 rounded-4 py-1 px-2" aria-label="Remove Keep From Vault" title="Remove Keep From Vault"><i class="mdi mdi-delete-forever text-shadow-shallow"></i></button>
         </div>

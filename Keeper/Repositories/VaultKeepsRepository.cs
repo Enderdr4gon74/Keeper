@@ -60,6 +60,7 @@ public class VaultKeepsRepository : BaseRepository
     {
       vaultKeepKeep.Creator = profile;
       vaultKeepKeep.VaultKeepId = vaultKeep.Id;
+      vaultKeepKeep.VaultKeepCreatorId = vaultKeep.CreatorId;
       return vaultKeepKeep;
     }, new {vaultId}).AsList();
     for (int i = 0; i < vaultKeepKeeps.Count; i++) {

@@ -13,6 +13,7 @@ public class VaultKeepKeep : ICreated, IRepoItem<int>
   public int Views { get; set; }
   public int Kept { get; set; }
   public int VaultKeepId { get; set; }
+  public string VaultKeepCreatorId { get; set; }
 
   
 }
