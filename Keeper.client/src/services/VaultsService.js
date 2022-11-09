@@ -46,17 +46,23 @@ class VaultsService {
 
   async createVault(vaultData) {
     console.log(vaultData)
-    await api.post("/api/vaults", vaultData)
+    const newVault = await api.post("/api/vaults", vaultData)
+    AppState.myVaults.push(new Vault(newVault.data))
     // TODO possibly router push to new vault page
     // TODO possibly add if statements that make new vault appear
   }
 
   async editVault(vaultData) {
-    console.log(vaultData)
+    // console.log(vaultData)
     const newVault = await api.put(`/api/vaults/${vaultData.id}`, vaultData)
-    AppState.vault = new Vault(newVault.data);
-    const vaultIndex = AppState.myVaults.findIndex(v => v.id == newVault.id)
-    AppState.myVaults.splice(vaultIndex, 1)
+    const newerVault = new Vault(newVault.data)
+    AppState.vault = newerVault;
+    const vaultIndex = AppState.myVaults.findIndex(v => v.id == newerVault.id)
+    // console.log(newerVault)
+    // console.log(vaultIndex)
+    // console.log(AppState.myVaults[vaultIndex])
+    AppState.myVaults.splice(vaultIndex, 1, newerVault)
+    // console.log(AppState.myVaults[vaultIndex])
   }
 
   async deleteVault(vaultId) {
