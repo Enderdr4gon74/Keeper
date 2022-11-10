@@ -40,6 +40,7 @@ export default {
       async handleSubmit() {
         try {
           await vaultsService.createVault(editable.value)
+          editable.value = {}
         } catch (error) {
           Pop.error(error, "[Handling Submit]")
         }

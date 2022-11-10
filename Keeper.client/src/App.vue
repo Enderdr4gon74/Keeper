@@ -12,7 +12,7 @@
   <div>
     <!-- STUB Keep Info Modal -->
     <div class="modal fade" id="KeepModal" tabindex="-1" aria-hidden="true">
-      <div class="modal-dialog modal-xl">
+      <div class="modal-dialog modal-xl spec-h">
         <div class="modal-content">
           <div class="modal-body row px-2-5 py-0">
             <KeepInfo />
@@ -115,6 +115,10 @@ footer {
 .px-2-5 {
   padding-left: 0.75rem;
   padding-right: 0.75rem;
+}
+
+.spec-h {
+  min-height: 75vh;
 }
 
 // .topNav {
